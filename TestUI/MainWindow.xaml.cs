@@ -27,11 +27,22 @@ namespace TestUI
         {
             InitializeComponent();
         }
+        
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnSerial_Click(object sender, RoutedEventArgs e)
         {
             SerialKey serialkey = new SerialKey();
             serialkey.ShowDialog();
+        }
+
+        private void btnBlowfish_Click(object sender, RoutedEventArgs e)
+        {
+            BlowfishUI blow = new BlowfishUI();
+            blow.ShowDialog();
         }
     }
 }
