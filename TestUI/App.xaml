@@ -4,6 +4,87 @@
              xmlns:local="clr-namespace:TestUI"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <!--Farben-->
+        <Color x:Key="BackgroundColor">#000000</Color>
+        <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}" />
+        <Color x:Key="LayerOneColor">#646464</Color>
+        <SolidColorBrush x:Key="LayerOneBrush" Color="{StaticResource LayerOneColor}" />
+        <SolidColorBrush x:Key="TransparentBrush" Color="Transparent" />
+        <Color x:Key="FontColor">#CCCCCC</Color>
+        <SolidColorBrush x:Key="FontBrush" Color="{StaticResource FontColor}" />
+        <Color x:Key="WindowNameColor">#FFFFFF</Color>
+        <SolidColorBrush x:Key="WindowNameBrush" Color="{StaticResource WindowNameColor}" />
+        <Color x:Key="LayerTwoColor">#464646</Color>
+        <SolidColorBrush x:Key="LayerTwoBrush" Color="{StaticResource LayerTwoColor}" />
+
+
+        <!--Großer Button-->
+        <Style x:Key="TileStyle" TargetType="{x:Type Button}">
+            <Setter Property ="Width" Value="70" />
+            <Setter Property ="Height" Value="70" />
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <!--<Setter Property="Grid.Row" Value="1"/>-->
+            <!--<Setter Property="Grid.RowSpan" Value="2"/>-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border Name="ButtonBorder" 
+                                    SnapsToDevicePixels="True" 
+                                    BorderBrush="#000000" 
+                                    Background="{TemplateBinding Background}" 
+                                    BorderThickness="0,0,0,0" >
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="BorderThickness" Value="5" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CanvasStyle" TargetType="Canvas">
+            <Setter Property ="Width" Value="170" />
+            <Setter Property ="Height" Value="170" />
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#000000"/>
+            <Setter Property="BorderBrush" Value="#646464"/>
+            <Setter Property="Foreground" Value="#CCCCCC"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border Name="ButtonBorder" 
+                                    SnapsToDevicePixels="True" 
+                                    BorderBrush="#000000" 
+                                    Background="{TemplateBinding Background}" 
+                                    BorderThickness="0,0,0,0" >
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="BorderThickness" Value="1"/>
+                                <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="#464646"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Application.Resources>
 </Application>

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestUI.Fenster"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="BlowfishUI" Height="350" Width="525" Background="#000000" WindowStyle="None" >
     <Grid>
         <Canvas Name="cvText" Height="290" Width="505" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
@@ -17,9 +18,9 @@
         </Canvas>
 
         <Canvas Name="cvButtons" Height="30" Width="505" Margin="10,310,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
-            <Button Name="btnEncrypt" Content="Encrypt" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="btnEncrypt_Click" Canvas.Left="90" Canvas.Top="5"/>
-            <Button Name="btnDecrypt" Content="Decrypt" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="btnDecrypt_Click" Canvas.Left="175" Canvas.Top="5"/>
-            <Button Name="btnClose"   Content="Close" HorizontalAlignment="Left" Margin="420,5,0,0" VerticalAlignment="Top" Width="75" Click="btnClose_Click"/>
+            <Button Name="btnEncrypt" Content="Encrypt" Style="{DynamicResource ButtonStyle}" Click="btnEncrypt_Click" Canvas.Left="90" Canvas.Top="2"/>
+            <Button Name="btnDecrypt" Content="Decrypt" Style="{DynamicResource ButtonStyle}" Click="btnDecrypt_Click" Canvas.Left="175" Canvas.Top="2"/>
+            <Button Name="btnClose"   Content="Close"  Style="{DynamicResource ButtonStyle}" Click="btnClose_Click" Canvas.Left="445" Canvas.Top="2"/>
         </Canvas>
     </Grid>
 </Window>

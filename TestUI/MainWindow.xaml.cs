@@ -44,5 +44,17 @@ namespace TestUI
             BlowfishUI blow = new BlowfishUI();
             blow.ShowDialog();
         }
+
+        private void btnSpline_Click(object sender, RoutedEventArgs e)
+        {
+            Spline spline = new Spline();
+            spline.ShowDialog();
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+
     }
 }

@@ -116,3 +116,15 @@ E:\VisualStudio\Projekte\KryptoAlg\TestUI\obj\Debug\Fenster\Blowfish.g.cs
 E:\VisualStudio\Projekte\KryptoAlg\TestUI\obj\Debug\Fenster\Blowfish.baml
 E:\VisualStudio\Projekte\KryptoAlg\TestUI\obj\Debug\Fenster\SerialKey.g.cs
 E:\VisualStudio\Projekte\KryptoAlg\TestUI\obj\Debug\Fenster\SerialKey.baml
+E:\VisualStudio\Projekte\KryptoAlg\TestUI\obj\Debug\App.baml
+E:\VisualStudio\Projekte\KryptoAlg\TestUI\bin\Debug\OxyPlot.dll
+E:\VisualStudio\Projekte\KryptoAlg\TestUI\bin\Debug\OxyPlot.Wpf.dll
+E:\VisualStudio\Projekte\KryptoAlg\TestUI\bin\Debug\OxyPlot.pdb
+E:\VisualStudio\Projekte\KryptoAlg\TestUI\bin\Debug\OxyPlot.xml
+E:\VisualStudio\Projekte\KryptoAlg\TestUI\bin\Debug\OxyPlot.Wpf.pdb
+E:\VisualStudio\Projekte\KryptoAlg\TestUI\bin\Debug\OxyPlot.Wpf.xml
+E:\VisualStudio\Projekte\KryptoAlg\TestUI\obj\Debug\Controls\Plotter.g.cs
+E:\VisualStudio\Projekte\KryptoAlg\TestUI\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\VisualStudio\Projekte\KryptoAlg\TestUI\obj\Debug\Controls\Plotter.baml
+E:\VisualStudio\Projekte\KryptoAlg\TestUI\obj\Debug\Fenster\Spline.g.cs
+E:\VisualStudio\Projekte\KryptoAlg\TestUI\obj\Debug\Fenster\Spline.baml
