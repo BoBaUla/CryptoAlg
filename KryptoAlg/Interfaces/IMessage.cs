@@ -6,12 +6,8 @@ namespace KryptoAlg.Interfaces
 {
     public interface IMessage<T>
     {
-        List<string> SplitMessage(string message);
+        ulong CreateNumber(string text);
 
-        string RecombineMessage(List<string> cipheredMessage);
-
-        T MakeTFromSubmessage(string submessage);
-
-        string MakeSubmessageFromT(T value);
+        string CreateSubmessage(ulong value);
     }
 }

@@ -2,49 +2,72 @@
 using KryptoAlg.Typen;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace KryptoAlg
 {
-    public class Krypt<T>: IKrypt
+    public class CipherService : IKrypt
     {
-        IAlgorithm<T> _cipherAlgorithm;
-        ITranslation<T> _translation;
-        IMessage<T> _messageHandler;
-        
-        public Krypt(IAlgorithm<T> alg, ITranslation<T> trans, IMessage<T> messageHandler)
+        Blowfish _cipherAlgorithm;
+        ITranslation<ulong> _encryptedRepresentation;
+        IMessage<ulong> _decryptedRepresentation;
+        ITextFormater _textFormater;
+
+        public CipherService()
         {
-            _cipherAlgorithm = alg;
-            _translation = trans;
-            _messageHandler = messageHandler;
+            _cipherAlgorithm = new Blowfish();
+            _encryptedRepresentation = new EncryptedRepresentation(new UlongBitShifter());
+            _decryptedRepresentation = new DecryptedRepresentation(new UlongBitShifter());
+            _textFormater = new TextFormater();
         }
 
         public string DecryptMessage(string message)
         {
             string result = "";
-            for(int i = 0; i < message.Length - 1; i = i + (int)EMessageSplit.Char_Bits)
+            var text = _textFormater.SplitMessage(message,16);
+            foreach (var subtext in text)
             {
-                string substring = message.Substring(i, (int)EMessageSplit.Char_Bits);
-                T val = _translation.TranslateString(substring);
-                result  += _messageHandler.MakeSubmessageFromT(_cipherAlgorithm.Decrypt(val));
+                var val = _encryptedRepresentation.TranslateString(subtext);
+                var decrypted = _cipherAlgorithm.Decrypt(val);
+                result  += _decryptedRepresentation.CreateSubmessage(decrypted);
             }
-            return result;
+            return result.Trim();
         }
 
         public string EncryptMessage(string message)
         {
             string result = "";
-            foreach (string val in _messageHandler.SplitMessage(message))
+            var text = _textFormater.SplitMessage(message, 8);
+            foreach (var subtext in text)
             {
-                T temp = _cipherAlgorithm.Encrypt(_messageHandler.MakeTFromSubmessage(val));
-                result += _translation.TranslateNumber(temp);
+                var val = _decryptedRepresentation.CreateNumber(subtext);
+                var decrypted = _cipherAlgorithm.Encrypt(val);
+                result += _encryptedRepresentation.TranslateNumber(decrypted);
             }
             return result;
         }
 
         public void SetKey(string key)
         {
-            
+            _cipherAlgorithm = new Blowfish();
+            _cipherAlgorithm.SetKey(NumberCreator.CreateNumber(key));
+            _cipherAlgorithm.StartSettings();
+        }
+    }
+    public class NumberCreator
+    {
+        public static uint CreateNumber(string text)
+        {
+            uint temp1 = text.Last();
+            uint temp2 = text.First();
+            foreach (var character in text)
+            {
+                temp2 = ((uint)temp2 * (uint)character) ^ 0xFFFF0000;
+                temp1 = ((uint)temp1 * (uint)character) ^ 0x0000FFFF;
+            }
+            var result = temp2 ^ temp1;
+            return result;
         }
     }
 }

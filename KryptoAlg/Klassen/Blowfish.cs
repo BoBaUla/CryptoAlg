@@ -6,24 +6,33 @@ using System;
 namespace KryptoAlg
 {
 
-    public class Blowfish : ASymmetric<string>, IAlgorithm<ulong>
+    public class Blowfish : ASymmetric<uint>, IAlgorithm<ulong>
     {
+        public UInt32[] PArray
+        {
+            get;
+            set;
+        } =  new uint[(int)EBlowfish.pArrayLength];
 
-        private UInt32[] _pArray = new uint[(int)EBlowfish.pArrayLength];
-        private UInt32[,] _sBox = new uint[(int)EBlowfish.sBoxesCount1, (int)EBlowfish.sBoxesCount2];
+        public UInt32[,] SBox
+        {
+            get;
+            set;
+        } = new uint[(int)EBlowfish.sBoxesCount1, (int)EBlowfish.sBoxesCount2];
         
         public Blowfish()
         {
+            _key = 0xFFFFFFFF;
             StartSettings();
         }
         
-        public override void SetKey(string Key)
+        public override void SetKey(uint Key)
         {
             _key = Key;
         }
 
         public void StartSettings()
-        {
+        {   
             InitPArray();
             InitSBoxes();
         }
@@ -86,8 +95,12 @@ namespace KryptoAlg
         /// </summary>
         private void InitPArray()
         {
-            for (uint i = 0; i < (int)EBlowfish.pArrayLength ; i++)
-                _pArray[i] =  (uint)(Math.PI * (i+1) * Math.Pow(10,10)) & 0xFFFFFFFF;
+            for (uint i = 0; i < (int)EBlowfish.pArrayLength; i++)
+            {
+                PArray[i] = (uint)(Math.PI * (i + 1) * Math.Pow(10, 10)) & 0xFFFFFFFF;
+                //var list = new System.Collections.Generic.List<string> { _pArray[i].ToString() + "\n" };
+                //System.IO.File.AppendAllLines(System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\pArray{_key}.txt",   list);
+            }
         }
 
         /// <summary>
@@ -97,7 +110,11 @@ namespace KryptoAlg
         {
             for (uint i = 0; i < (int)EBlowfish.sBoxesCount1; i++)
                 for (uint j = 0; j < (int)EBlowfish.sBoxesCount2; j++)
-                    _sBox[i, j] = i + j;
+                {
+                    SBox[i, j] = (uint)((uint)(Math.PI * (i + j)) ^ _key);
+                    //var list = new System.Collections.Generic.List<string> { $"{i}, {j} {_sBox[i, j]} \n" };
+                    //System.IO.File.AppendAllLines(System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\sBox{_key}.txt", list);
+                }
         }
 
 
@@ -114,13 +131,13 @@ namespace KryptoAlg
             xR = temp[1];
             for (int i = 0; i < (int)EBlowfish.Rounds - 1; i += (int)EBlowfish.Steps)
             {
-                xL ^= _pArray[i];
+                xL ^= PArray[i];
                 xR ^= Fistel(xL);
-                xR ^= _pArray[i + 1];
+                xR ^= PArray[i + 1];
                 xL ^= Fistel(xR);
             }
-            xL ^= _pArray[(int)EBlowfish.Rounds - 2];
-            xR ^= _pArray[(int)EBlowfish.Rounds - 1];
+            xL ^= PArray[(int)EBlowfish.Rounds - 2];
+            xR ^= PArray[(int)EBlowfish.Rounds - 1];
             return Recombine64(xL, xR );
         }
 
@@ -138,15 +155,15 @@ namespace KryptoAlg
             xL = temp[0];
             xR = temp[1];
 
-            xR ^= _pArray[(int)EBlowfish.Rounds - 1];
-            xL ^= _pArray[(int)EBlowfish.Rounds - 2];
+            xR ^= PArray[(int)EBlowfish.Rounds - 1];
+            xL ^= PArray[(int)EBlowfish.Rounds - 2];
 
             for (int i = (int)EBlowfish.Rounds - 1; i > 0; i -= (int)EBlowfish.Steps)
             {
                 xL ^= Fistel(xR);
-                xR ^= _pArray[i];
+                xR ^= PArray[i];
                 xR ^= Fistel(xL);
-                xL ^= _pArray[i - 1];
+                xL ^= PArray[i - 1];
             }
             return Recombine64(xL, xR);
         }
@@ -156,7 +173,7 @@ namespace KryptoAlg
         {
             uint[] val = Split8(x);
 
-            uint test = (((_sBox[0, val[0]] + _sBox[1, val[1]]) % 0xFFFFFFFF) ^ (_sBox[2, val[2]] + _sBox[3, val[3]]) % 0xFFFFFFFF);
+            uint test = (((SBox[0, val[0]] + SBox[1, val[1]]) % 0xFFFFFFFF) ^ (SBox[2, val[2]] + SBox[3, val[3]]) % 0xFFFFFFFF);
             return test;
         }
 
