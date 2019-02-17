@@ -1,7 +1,6 @@
 ﻿using KryptoAlg.Interfaces;
 using KryptoAlg.Typen;
 using System;
-using System.Text;
 
 namespace KryptoAlg
 {

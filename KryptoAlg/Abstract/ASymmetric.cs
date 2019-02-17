@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace KryptoAlg.Abstract
+﻿namespace KryptoAlg.Abstract
 {
     public abstract class ASymmetric<T>
     {

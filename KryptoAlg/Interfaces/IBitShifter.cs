@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace KryptoAlg.Interfaces
+﻿namespace KryptoAlg.Interfaces
 {
     public interface IBitShifter<T>
     {
