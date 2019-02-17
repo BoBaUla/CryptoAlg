@@ -25,8 +25,10 @@ namespace TextFormaterTests
             var result = _cut.SplitMessage(text, 8);
 
             Assert.AreEqual(expectedItemCount, result.Count);
-            Assert.IsTrue(result.First().Length == 8);
-            Assert.IsTrue(result.Last().Length == 8);
+            foreach(var value in result)
+            {
+                Assert.IsTrue(value.Length == 8);
+            }
         }
 
         [Test]

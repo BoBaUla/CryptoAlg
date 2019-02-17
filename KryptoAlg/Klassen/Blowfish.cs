@@ -98,8 +98,6 @@ namespace KryptoAlg
             for (uint i = 0; i < (int)EBlowfish.pArrayLength; i++)
             {
                 PArray[i] = (uint)(Math.PI * (i + 1) * Math.Pow(10, 10)) & 0xFFFFFFFF;
-                //var list = new System.Collections.Generic.List<string> { _pArray[i].ToString() + "\n" };
-                //System.IO.File.AppendAllLines(System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\pArray{_key}.txt",   list);
             }
         }
 
@@ -111,9 +109,7 @@ namespace KryptoAlg
             for (uint i = 0; i < (int)EBlowfish.sBoxesCount1; i++)
                 for (uint j = 0; j < (int)EBlowfish.sBoxesCount2; j++)
                 {
-                    SBox[i, j] = (uint)((uint)(Math.PI * (i + j)) ^ _key);
-                    //var list = new System.Collections.Generic.List<string> { $"{i}, {j} {_sBox[i, j]} \n" };
-                    //System.IO.File.AppendAllLines(System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + $"\\sBox{_key}.txt", list);
+                    SBox[i, j] = (uint)((uint)(Math.PI * (i - j + 10)) ^ _key);
                 }
         }
 
@@ -128,7 +124,9 @@ namespace KryptoAlg
             uint[] temp = Split64(x);
             uint xL, xR;
             xL = temp[0];
+            var xLOld = xL;
             xR = temp[1];
+            var xROld = xR;
             for (int i = 0; i < (int)EBlowfish.Rounds - 1; i += (int)EBlowfish.Steps)
             {
                 xL ^= PArray[i];

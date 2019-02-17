@@ -1,9 +1,0 @@
-E:\VisualStudio\Projekte\KryptoAlg\KryptoAlg\bin\Debug\netstandard2.0\KryptoAlg.deps.json
-E:\VisualStudio\Projekte\KryptoAlg\KryptoAlg\bin\Debug\netstandard2.0\KryptoAlg.dll
-E:\VisualStudio\Projekte\KryptoAlg\KryptoAlg\bin\Debug\netstandard2.0\KryptoAlg.pdb
-E:\VisualStudio\Projekte\KryptoAlg\KryptoAlg\obj\Debug\netstandard2.0\KryptoAlg.csprojAssemblyReference.cache
-E:\VisualStudio\Projekte\KryptoAlg\KryptoAlg\obj\Debug\netstandard2.0\KryptoAlg.csproj.CoreCompileInputs.cache
-E:\VisualStudio\Projekte\KryptoAlg\KryptoAlg\obj\Debug\netstandard2.0\KryptoAlg.AssemblyInfoInputs.cache
-E:\VisualStudio\Projekte\KryptoAlg\KryptoAlg\obj\Debug\netstandard2.0\KryptoAlg.AssemblyInfo.cs
-E:\VisualStudio\Projekte\KryptoAlg\KryptoAlg\obj\Debug\netstandard2.0\KryptoAlg.dll
-E:\VisualStudio\Projekte\KryptoAlg\KryptoAlg\obj\Debug\netstandard2.0\KryptoAlg.pdb
