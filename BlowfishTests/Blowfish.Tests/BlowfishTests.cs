@@ -82,6 +82,21 @@ namespace BlowfishTests
             }
 
             [Test]
+            public void EncryptionWithDifferentSalt_ReturnsDifferentValues()
+            {
+                var toEncrypt = 123u;
+                var salt1 = 1u;
+                var salt2 = 2u;
+                _cut.SetSalt(salt1);
+                var result1 = _cut.Encrypt(toEncrypt);
+
+                _cut.SetSalt(salt2);
+                var result2 = _cut.Encrypt(toEncrypt);
+                Assert.AreNotEqual(result1, result2);
+
+            }
+
+            [Test]
             public void DifferentKeys()
             {
                 var toEncrypt = ulong.MaxValue;

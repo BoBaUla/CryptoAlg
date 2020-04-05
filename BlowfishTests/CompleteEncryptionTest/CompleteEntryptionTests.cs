@@ -30,7 +30,6 @@ namespace CompleteEntryptionTests
                 Assert.AreNotEqual(input, result);
                 for(int character = 0; character < input.Length; character++)
                 {
-
                     Assert.AreNotEqual(input[character], result[character]);
                 }
             }
@@ -42,18 +41,16 @@ namespace CompleteEntryptionTests
             IKrypt _cutHelper;
 
             string result1;
-            string result2;
 
-            static string input1 = "abcdefghijklmnopqrst";
-            static string input2 = "123456789jklmnopqrst";
+            static string input1 = "abcdefghijklmnopqrstuvwxyz";
+            static string input2 = "abcdefghijklmnopqrstuvwxyz123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             [SetUp]
             public new void Setup()
             {
                 _cutHelper = new CipherService();
-                _cutHelper.SetKey("abcde");
+                _cutHelper.SetKey("1234");
 
                 result1 = _cut.EncryptMessage(input1);
-                result2 = _cutHelper.EncryptMessage(input1);
             }
             
             [Test, TestCaseSource(nameof(input1))]
@@ -70,8 +67,11 @@ namespace CompleteEntryptionTests
             {
                 var position = input2.IndexOf(character);
                 var result = _cutHelper.DecryptMessage(result1);
-                var value = (char)result[position];
-                Assert.AreNotEqual(character, value);
+                if (position < result.Length)
+                {
+                    var value = (char)result[position];
+                    Assert.AreNotEqual(character, value);
+                }
             }
         }
     }

@@ -8,13 +8,13 @@ namespace KryptoAlg
 
     public class Blowfish : ASymmetric<uint>, IAlgorithm<ulong>
     {
-        public UInt32[] PArray
+        public uint[] PArray
         {
             get;
             set;
         } =  new uint[(int)EBlowfish.pArrayLength];
 
-        public UInt32[,] SBox
+        public uint[,] SBox
         {
             get;
             set;
@@ -39,11 +39,13 @@ namespace KryptoAlg
 
         public ulong Decrypt(ulong toDecrypt)
         {
+            StartSettings();
             return Backward(toDecrypt);
         }
 
         public ulong Encrypt(ulong toEncrypt)
         {
+            StartSettings();
             return Forward(toEncrypt);
         }
 
@@ -109,7 +111,7 @@ namespace KryptoAlg
             for (uint i = 0; i < (int)EBlowfish.sBoxesCount1; i++)
                 for (uint j = 0; j < (int)EBlowfish.sBoxesCount2; j++)
                 {
-                    SBox[i, j] = (uint)((uint)(Math.PI * (i - j + 10)) ^ _key);
+                    SBox[i, j] = (uint)((uint)(Math.PI * (i - j + 10)) ^ UseKeyWithSalt());
                 }
         }
 
@@ -175,5 +177,9 @@ namespace KryptoAlg
             return test;
         }
 
+        public override uint UseKeyWithSalt()
+        {
+            return _key + _salt;
+        }
     }
 }

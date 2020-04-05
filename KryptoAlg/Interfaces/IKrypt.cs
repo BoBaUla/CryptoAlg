@@ -6,6 +6,7 @@
     public interface IKrypt
     {
         void SetKey(string key);
+        void SetSalt(string salt);
         string EncryptMessage(string message);
         string DecryptMessage(string message);
     }

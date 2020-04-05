@@ -50,6 +50,11 @@ namespace KryptoAlg
             _cipherAlgorithm.SetKey(NumberCreator.CreateNumber(key));
             _cipherAlgorithm.StartSettings();
         }
+
+        public void SetSalt(string salt)
+        {
+            _cipherAlgorithm.SetSalt(NumberCreator.CreateNumber(salt));
+        }
     }
     public class NumberCreator
     {
